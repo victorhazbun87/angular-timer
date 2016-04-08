@@ -9,7 +9,7 @@ var timerModule = angular.module('timer', [])
         endTimeAttr: '=endTime',
         countdownattr: '=countdown',
         finishCallback: '&finishCallback',
-        autoStart: '&autoStart',
+        autoStartAttr: '=autoStart',
         language: '@?',
         fallback: '@?',
         maxTimeUnit: '=',
@@ -35,12 +35,6 @@ var timerModule = angular.module('timer', [])
             return this.replace(/^\s+|\s+$/g, '');
           };
         }
-
-        //angular 1.2 doesn't support attributes ending in "-start", so we're
-        //supporting both "autostart" and "auto-start" as a solution for
-        //backward and forward compatibility.
-        $scope.autoStart = $attrs.autoStart || $attrs.autostart;
-
 
         $scope.language = $scope.language || 'en';
         $scope.fallback = $scope.fallback || 'en';
@@ -332,7 +326,7 @@ var timerModule = angular.module('timer', [])
           }
         };
 
-        if ($scope.autoStart === undefined || $scope.autoStart === true) {
+        if ($scope.autoStartAttr === undefined || $scope.autoStartAttr === true) {
           $scope.start();
         }
       }]
